@@ -1122,6 +1122,7 @@ void Mesh::convert_triangles_to_quads()
        tmp.nodes[i].y = 0.0;
      }
   }
+  if (access("mesh_temp_for_convert.mesh", 0) == 0) sleep(3);
   tmp.save("mesh_temp_for_convert.mesh");
   Mesh mesh_tmp_for_convert;
   H2DReader loader_mesh_tmp_for_convert;
@@ -1149,6 +1150,7 @@ void Mesh::convert_quads_to_triangles()
        tmp.nodes[i].y = 0.0;
      }
   }
+  if (access("mesh_temp_for_convert.mesh", 0) == 0) sleep(3);
   tmp.save("mesh_temp_for_convert.mesh");
   Mesh mesh_tmp_for_convert;
   H2DReader loader_mesh_tmp_for_convert;

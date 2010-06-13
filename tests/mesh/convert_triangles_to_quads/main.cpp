@@ -13,6 +13,11 @@ int main(int argc, char* argv[])
     return ERROR_FAILURE;
   }
 
+  if (argv[2] == NULL)
+    usleep(0);
+  else
+    usleep(atoi(argv[2]));
+
   // load the mesh file
   Mesh mesh;
   H2DReader mloader;
