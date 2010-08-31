@@ -23,7 +23,7 @@ using namespace RefinementSelectors;
 const int INIT_REF_NUM = 2;                // Number of initial uniform mesh refinements.
 const int P_INIT = 2;                      // Initial polynomial degree of all mesh elements.
 const int TIME_DISCR = 2;                  // 1 for implicit Euler, 2 for Crank-Nicolson.
-const double TAU = 0.5;                    // Time step.
+const double TAU = 0.1;                    // Time step.
 const double T_FINAL = 5.0;                // Time interval length.
 
 // Adaptivity
@@ -169,6 +169,7 @@ int main(int argc, char* argv[])
                     NEWTON_TOL_COARSE, NEWTON_MAX_ITER, verbose))
     error("Newton's method did not converge.");
   sln_prev_time.set_fe_solution(space, coeff_vec);
+//  project_global(space, H2D_H1_NORM, &sln_prev_time, &sln, NULL);
 
   // Time stepping loop.
   Solution sln, ref_sln;
@@ -184,7 +185,9 @@ int main(int argc, char* argv[])
 
       // Project on globally derefined mesh.
       info("Projecting previous fine mesh solution on derefined mesh.");
-      project_global(space, H2D_H1_NORM, &ref_sln, NULL, coeff_vec);
+//      project_global(space, H2D_H1_NORM, &ref_sln, NULL, coeff_vec);
+//      project_global(space, H2D_H1_NORM, &ref_sln, &sln_prev_time, NULL);
+      project_global(space, H2D_H1_NORM, &ref_sln, &sln_prev_time, coeff_vec);
 
       // Newton's method on derefined mesh (moving one time step forward).
       info("Solving on derefined mesh.");
